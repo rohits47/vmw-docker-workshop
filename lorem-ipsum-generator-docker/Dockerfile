@@ -3,5 +3,6 @@ FROM nginx
 RUN mkdir /etc/nginx/logs && touch /etc/nginx/logs/static.log
 
 ADD nginx.conf /etc/nginx/conf.d/default.conf
-ADD index.html /www/
+ADD frontend/index.html /www/
+ADD frontend/grid.css /www/
 ADD 404.html /www/
