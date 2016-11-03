@@ -38,6 +38,44 @@
   <body>
     <div class="container">
 
+      <div class="page-header">
+        <h1>Lorem Ipsum Generator</h1>
+        <p class="lead">Input options below.</p>
+      </div>
+
+      <h3>Specify your parameters below.</h3>
+      <p>Choose how many paragraphs, words, and sentences of sample text you would like to generate, and whether to show HTML tags or formatted text.</p>
+
+      <form name="parameter-form">
+        <div class="form-group">
+          <label for="paragraph">Paragraphs</label>
+          <input type="number" class="form-control" id="paragraph" placeholder="5">
+        </div>
+        <div class="form-group">
+          <label for="word">Words</label>
+          <input type="number" class="form-control" id="word" placeholder="1">
+        </div>
+        <div class="form-group">
+          <label for="sentence">Sentences</label>
+          <input type="number" class="form-control" id="sentence" placeholder="5">
+        </div>
+        <div class="form-group">
+          <label for="tags">Paragraphs</label>
+          <input type="number" class="form-control" id="tags" placeholder="5">
+        </div>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input">
+            Show HTML Tags
+          </label>
+        </div>
+        
+        <button type="submit" class="btn btn-primary" onclick="document.getElementById('output-div').html = 'Thank You';">Submit</button>
+      </form>
+
+      <div id="output-div"><h3>Your awesome text, generated fresh just for you!</h3>
+            <p>To be populated with your text.</p></div>
+
 
     </div> <!-- /container -->
 
