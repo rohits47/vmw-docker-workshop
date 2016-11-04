@@ -5,6 +5,8 @@ import json
 from pprint import pprint
 # from twitter_trends import generate_json_file
 
+def str2bool(v):
+  return v.lower() in ("true")
 
 def parse_json(filename):
     with open(filename) as data_file:    
@@ -24,7 +26,8 @@ def validate(paragraphs, sentences, words, tags):
       error = "Error: Number of paragraphs is greater than 100"
     return error
 
-def text_generator(paragraphs, sentences, words, tags):
+def text_generator(paragraphs, sentences, words, htmltags):
+    tags = str2bool(htmltags)
     validation = validate(paragraphs, sentences, words, tags)
     if validation:
       return validation
