@@ -3,10 +3,7 @@ import sys
 import getopt
 import json
 from pprint import pprint
-# from twitter_trends import generate_json_file
-
-def str2bool(v):
-  return v.lower() in ("true")
+#from twitter_trends import generate_json_file
 
 def parse_json(filename):
     with open(filename) as data_file:    
@@ -26,12 +23,11 @@ def validate(paragraphs, sentences, words, tags):
       error = "Error: Number of paragraphs is greater than 100"
     return error
 
-def text_generator(paragraphs, sentences, words, htmltags):
-    tags = str2bool(htmltags)
+def text_generator(paragraphs, sentences, words, tags):
     validation = validate(paragraphs, sentences, words, tags)
     if validation:
       return validation
-    # generate_json_file()
+    #generate_json_file()
     tweets = parse_json('data.json')
     output = []
     for key in tweets:
