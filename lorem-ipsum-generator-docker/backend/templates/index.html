@@ -36,6 +36,32 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $('#thebutton').click(function() {
+          var paragraph = $('#paragraph').val();
+          var word = $('#word').val();
+          var sentence = $('#sentence').val();
+          var tags = $('#tags').val();
+          $.get("/gen/" + paragraph + "/" + word + "/" + sentence + "/" + tags, function( data ) {
+            $( "#output-div" ).html( data );
+          });
+        });
+      });
+      // $(document).ready(function(){
+      //   $("#thebutton").click(function(event){
+      //     var fdata = $('#parameter-form').serialize()
+      //     alert(fdata);
+      //     $.get("/gen".concat(fdata), function( data ) {
+      //       $( "#output-div" ).html( data );
+      //       alert( "VICTORY!!!!" );
+      //     });
+      //   });
+      // });
+    </script>
+
     <!-- Custom styles for this template -->
     <link href="grid.css" rel="stylesheet">
 
@@ -61,7 +87,7 @@
       <h3>Specify your parameters below.</h3>
       <p>Choose how many paragraphs, words, and sentences of sample text you would like to generate, and whether to show HTML tags or formatted text.</p>
 
-      <form name="parameter-form" class="form-inline">
+      <form id="parameter-form" class="form-inline">
         <div class="form-group" style="margin: 10px">
           <label for="paragraph" style="margin-right: 10px">Paragraphs</label>
           <input type="number" class="form-control" id="paragraph" placeholder="5">
@@ -76,13 +102,17 @@
         </div>
         <div class="form-check-inline" style="margin: 10px">
           <label class="form-check-label">
-          <input type="checkbox" class="form-check-input">
+          <input type="checkbox" class="form-check-input" id="tags">
           Show HTML Tags
           </label>
         </div>
         
         <div class="form-group">
+<<<<<<< HEAD:lorem-ipsum-generator-docker/frontend/index.html
           <button onclick="myFunction()" type="button" class="btn btn-primary" onclick="document.getElementById('output-div').innerHTML='ourcustomtext';">Submit</button>
+=======
+          <button type="button" class="btn btn-primary" id="thebutton">Submit</button>
+>>>>>>> b0fea8c380c4340743407222e49cd40024bb5798:lorem-ipsum-generator-docker/backend/templates/index.html
         </div>
       </form>
 
