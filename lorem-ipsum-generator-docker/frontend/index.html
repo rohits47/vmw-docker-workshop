@@ -11,6 +11,21 @@
 
     <title>Grid Template for Bootstrap</title>
 
+    <script> //type="text/javascript">
+       function myFunction() {
+           // document.body.style.backgroundColor = "yellow";
+           document.body.style.backgroundImage = "url('background_bird.png')"
+       }
+    </script>
+
+    <!-- Styles --> 
+    <style style="text/css">
+      body {
+        background-repeat: repeat;
+        background-size: 400px 300px;
+      }
+    </style>
+
     <!-- Bootstrap core CSS -->
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -36,7 +51,7 @@
   </head>
 
   <body>
-    <div class="container">
+    <div class="container" style="background-color: papayawhip">
 
       <div class="page-header">
         <h1>Lorem Ipsum Generator</h1>
@@ -67,13 +82,12 @@
         </div>
         
         <div class="form-group">
-          <button type="button" class="btn btn-primary" onclick="document.getElementById('output-div').innerHTML='ourcustomtext';">Submit</button>
+          <button onclick="myFunction()" type="button" class="btn btn-primary" onclick="document.getElementById('output-div').innerHTML='ourcustomtext';">Submit</button>
         </div>
       </form>
 
       <div><h3>Your awesome text, generated fresh just for you!</h3>
             <p id="output-div">To be populated with your text.</p></div>
-
 
     </div> <!-- /container -->
 
