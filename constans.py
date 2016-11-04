@@ -23,3 +23,6 @@ NAME = "name"
 URL = "url"
 TRENDS = "trends"
 DATA_OUTPUT = "data.json"
+
+# for log file name
+LOG_NAME_PRE = "vmw-docker-workshop"

@@ -120,4 +120,3 @@ def generate_json_file():
     with open(constans.DATA_OUTPUT, 'w') as outfile:
         json.dump(data, outfile)
 
-generate_json_file()
