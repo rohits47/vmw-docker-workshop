@@ -13,19 +13,19 @@ def parse_json(filename):
 
 def validate(paragraphs, sentences, words, tags):
        if (paragraphs > sentences):
-               error = "Number of sentences is fewer than paragraphs"
+               error = "Error: Number of sentences is fewer than paragraphs"
                return False
        if (sentences > words):
-               error = "Number of sentences is fewer than paragraphs"
+               error = "Error: Number of sentences is fewer than paragraphs"
                return False
        if (words > 10000):
-               error = "Number of words is more than 10000"
+               error = "Error: Number of words is more than 10000"
                return False
        if (sentences > 1000):
-               error = "Number of sentences is greater than 1000"
+               error = "Error: Number of sentences is greater than 1000"
                return False
        if (paragraphs > 100):
-               error = "Number of paragraphs is greater than 100"
+               error = "Error: Number of paragraphs is greater than 100"
                return False
        return True
 
@@ -33,6 +33,7 @@ def text_generator(paragraphs, sentences, words, tags):
     validation = validate(paragraphs, sentences, words, tags)
     if (validation == False):
       return error
+    generate_json_file()
     tweets = parse_json('data.json')
     output = []
     for key in tweets:
@@ -42,8 +43,8 @@ def text_generator(paragraphs, sentences, words, tags):
             print tmpStr
             temp = tmpStr.split(' ')
             output = output + temp 
-
-    print "Tweets string: \n" 
+    if (__debug__):
+        print "Debug: Tweets string: \n"
     sentencesPerPara = sentences/paragraphs
     wordsPerSentence = words/sentences
     outLen = len(output)
@@ -100,7 +101,8 @@ def text_generator(paragraphs, sentences, words, tags):
             final = final + "</p>"
         else:
            final = final + '\n\n'
-    print "final\n", final
+    if (__debug__):
+        print "Debug: final\n", final
     return final            
      
 def main():
@@ -110,8 +112,8 @@ def main():
     words = data["word"]
     sentences = data["sentences"]
     tags = data["tags"]
-
-    print("paragraphs: ", paragraphs, ", words: ", words, ", sentences: ", sentences, ", tags: ", tags, " test: ", )
+    if (__debug__):
+        print("Debug: paragraphs: ", paragraphs, ", words: ", words, ", sentences: ", sentences, ", tags: ", tags, " test: ", )
     return text_generator(int(paragraphs), int(sentences), int(words), bool(tags))
 
 if __name__ == "__main__":
