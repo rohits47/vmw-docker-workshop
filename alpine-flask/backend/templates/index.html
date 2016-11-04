@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Grid Template for Bootstrap</title>
+    <style style="text/css">
+      body {
+        background-repeat: repeat;
+        background-size: 400px 300px;
+      }
+    </style>
+    <!-- Bootstrap core CSS -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $('#thebutton').click(function() {
+          $( "#output-div" ).html("Your content is loading...");
+          var paragraph = $('#paragraph').val();
+          if (paragraph == null || paragraph.length === 0) {
+            paragraph = 1;
+          }
+          var word = $('#word').val();
+          if (word == null || word.length === 0) {
+            word = 5;
+          }
+          var sentence = $('#sentence').val();
+          if (sentence == null || sentence.length === 0) {
+            sentence = 1;
+          }
+          var tags = $('#tags').is(':checked');
+          $.get("/gen/" + paragraph + "/" + word + "/" + sentence + "/" + tags, function( data ) {
+            if (tags) {
+              $( "#output-div" ).text( data );
+            } else {
+              $( "#output-div" ).html( data );
+            }
+          });
+          document.body.style.backgroundImage = "url('static/background_bird.png')";
+        });
+      });
+      // $(document).ready(function(){
+      //   $("#thebutton").click(function(event){
+      //     var fdata = $('#parameter-form').serialize()
+      //     alert(fdata);
+      //     $.get("/gen".concat(fdata), function( data ) {
+      //       $( "#output-div" ).html( data );
+      //       alert( "VICTORY!!!!" );
+      //     });
+      //   });
+      // });
+    </script>
+
+    <!-- Custom styles for this template -->
+    <link href="static/grid.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <!-- <script src="assets/js/ie-emulation-modes-warning.js"></script> -->
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <div class="container" style="background-color: papayawhip">
+
+      <div class="page-header">
+        <h1>Lorem Ipsum Generator</h1>
+        <p class="lead">Input options below.</p>
+      </div>
+
+      <h3>Specify your parameters below.</h3>
+      <p>Choose how many paragraphs, words, and sentences of sample text you would like to generate, and whether to show HTML tags or formatted text.</p>
+
+      <form id="parameter-form" class="form-inline">
+        <div class="form-group" style="margin: 10px">
+          <label for="paragraph" style="margin-right: 10px">Paragraphs</label>
+          <input type="number" class="form-control" id="paragraph" placeholder="1">
+        </div>
+        <div class="form-group" style="margin: 10px">
+          <label for="word" style="margin-right: 10px">Words</label>
+          <input type="number" class="form-control" id="word" placeholder="5">
+        </div>
+        <div class="form-group" style="margin: 10px">
+          <label for="sentence" style="margin-right: 10px">Sentences</label>
+          <input type="number" class="form-control" id="sentence" placeholder="1">
+        </div>
+        <div class="form-check-inline" style="margin: 10px">
+          <label class="form-check-label">
+          <input type="checkbox" class="form-check-input" id="tags">
+          Show HTML Tags
+          </label>
+        </div>
+        
+        <div class="form-group">
+          <button type="button" class="btn btn-primary" id="thebutton">Submit</button>
+        </div>
+      </form>
+
+      <div><h3>Your awesome text, generated fresh just for you!</h3>
+            <p id="output-div">Press submit to see your text.</p></div>
+
+
+    </div> <!-- /container -->
+
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
+  </body>
+</html>

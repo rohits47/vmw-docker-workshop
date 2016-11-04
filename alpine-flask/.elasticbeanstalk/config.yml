@@ -1,0 +1,13 @@
+branch-defaults:
+  default:
+    environment: group2-env
+    group_suffix: null
+global:
+  application_name: group2loremipsum
+  branch: null
+  default_ec2_keyname: vmw-eb-docker.pem
+  default_platform: Docker 1.11.2
+  default_region: us-west-1
+  profile: eb-cli
+  repository: null
+  sc: null
