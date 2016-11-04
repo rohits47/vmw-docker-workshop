@@ -4,7 +4,7 @@
     {
       "name": "eb-php-app",
       "host": {
-        "sourcePath": "/var/www"
+        "sourcePath": "/var/www/backend"
       }
     }
   ],
