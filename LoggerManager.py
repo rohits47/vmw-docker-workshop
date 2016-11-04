@@ -6,6 +6,7 @@ import logging
 import logging.config
 import os
 import time
+import constans
 
 
 class Singleton(type):
@@ -34,8 +35,8 @@ class LoggerManager(object):
                                       datefmt='%Y-%m-%d %H:%M:%S')
         date_time = time.strftime("%d_%m_%Y")
         # TODO: for different module, need to create new map item for logging
-        log_map = {"__main__": "FlightSchoolProject" + date_time + ".log",
-                   "__twitter_trends_log__": "FlightSchoolProject" + date_time + ".log"}
+        log_map = {"__main__": constans.LOG_NAME_PRE + date_time + ".log",
+                   "__twitter_trends_log__": constans.LOG_NAME_PRE + date_time + ".log"}
         if name:
             logger = logging.getLogger(name)
         else:
