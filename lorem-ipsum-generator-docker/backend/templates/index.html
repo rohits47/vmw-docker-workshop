@@ -25,16 +25,26 @@
 
     <script type="text/javascript">
       $(document).ready(function(){
-        $("#thebutton").click(function(event){
-          $.ajax({
-            type: "POST",
-            url: "localhost/gen",
-            data: {"paragraph": 1, "word": 1, "tags": true, "sentences": 1}
-          }).done(function( o ) {
-             alert("HOLD THE DOOR!");
+        $('#thebutton').click(function() {
+          var paragraph = $('#paragraph').val();
+          var word = $('#word').val();
+          var sentence = $('#sentence').val();
+          var tags = $('#tags').val();
+          $.get("/gen/" + paragraph + "/" + word + "/" + sentence + "/" + tags, function( data ) {
+            $( "#output-div" ).html( data );
           });
         });
       });
+      // $(document).ready(function(){
+      //   $("#thebutton").click(function(event){
+      //     var fdata = $('#parameter-form').serialize()
+      //     alert(fdata);
+      //     $.get("/gen".concat(fdata), function( data ) {
+      //       $( "#output-div" ).html( data );
+      //       alert( "VICTORY!!!!" );
+      //     });
+      //   });
+      // });
     </script>
 
     <!-- Custom styles for this template -->
@@ -62,7 +72,7 @@
       <h3>Specify your parameters below.</h3>
       <p>Choose how many paragraphs, words, and sentences of sample text you would like to generate, and whether to show HTML tags or formatted text.</p>
 
-      <form name="parameter-form" class="form-inline">
+      <form id="parameter-form" class="form-inline">
         <div class="form-group" style="margin: 10px">
           <label for="paragraph" style="margin-right: 10px">Paragraphs</label>
           <input type="number" class="form-control" id="paragraph" placeholder="5">
@@ -77,13 +87,13 @@
         </div>
         <div class="form-check-inline" style="margin: 10px">
           <label class="form-check-label">
-          <input type="checkbox" class="form-check-input">
+          <input type="checkbox" class="form-check-input" id="tags">
           Show HTML Tags
           </label>
         </div>
         
         <div class="form-group">
-          <button type="button" class="btn btn-primary" id="thebutton" onclick="document.getElementById('output-div').innerHTML='ourcustomtext';">Submit</button>
+          <button type="button" class="btn btn-primary" id="thebutton">Submit</button>
         </div>
       </form>
 
