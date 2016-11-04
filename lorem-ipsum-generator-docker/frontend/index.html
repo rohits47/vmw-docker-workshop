@@ -46,31 +46,29 @@
       <h3>Specify your parameters below.</h3>
       <p>Choose how many paragraphs, words, and sentences of sample text you would like to generate, and whether to show HTML tags or formatted text.</p>
 
-      <form name="parameter-form" enctype="application/json">
-        <div class="form-group col-sm-2">
+      <form name="parameter-form" class="form-inline">
+        <div class="form-group">
           <label for="paragraph">Paragraphs</label>
           <input type="number" class="form-control" id="paragraph" placeholder="5">
         </div>
-        <div class="form-group col-sm-2">
+        <div class="form-group">
           <label for="word">Words</label>
           <input type="number" class="form-control" id="word" placeholder="1">
         </div>
-        <div class="form-group col-sm-2">
+        <div class="form-group">
           <label for="sentence">Sentences</label>
-          <input type="number" class="form-control" id="sentence" placeholder="5">
-        </div>
-        <div class="form-group col-sm-2">
-          <label for="tags">Paragraphs</label>
-          <input type="number" class="form-control" id="tags" placeholder="5">
+          <input type="number" class="form-control" id="sentence" placeholder="1">
         </div>
         <div class="form-check">
           <label class="form-check-label">
-            <input type="checkbox" class="form-check-input">
-            Show HTML Tags
+          <input type="checkbox" class="form-check-input">
+          Show HTML Tags
           </label>
         </div>
         
-        <button type="button" class="btn btn-primary" onclick="document.getElementById('output-div').innerHTML='ourcustomtext';">Submit</button>
+        <div class="form-group">
+          <button type="button" class="btn btn-primary" onclick="document.getElementById('output-div').innerHTML='ourcustomtext';">Submit</button>
+        </div>
       </form>
 
       <div><h3>Your awesome text, generated fresh just for you!</h3>
