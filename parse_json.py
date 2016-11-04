@@ -3,6 +3,7 @@ import sys
 import getopt
 import json
 from pprint import pprint
+from twitter_trends import generate_json_file
 
 error = ""
 
@@ -12,6 +13,9 @@ def parse_json(filename):
 
 def validate(paragraphs, sentences, words, tags):
        if (paragraphs > sentences):
+               error = "Number of sentences is fewer than paragraphs"
+               return False
+       if (sentences > words):
                error = "Number of sentences is fewer than paragraphs"
                return False
        if (words > 10000):
@@ -26,41 +30,77 @@ def validate(paragraphs, sentences, words, tags):
        return True
 
 def text_generator(paragraphs, sentences, words, tags):
-    print("Validates input and generates text from tweets.json")
     validation = validate(paragraphs, sentences, words, tags)
-    print "After validate", validation
     if (validation == False):
-       return error
-    print "Before parse"
-    tweets = parse_json('tweets.json')
+      return error
+    tweets = parse_json('data.json')
     output = []
-    c = 0
-    print "Tweet parse "
     for key in tweets:
         for data in tweets[key]:
-            data["tweet_content"].replace("."," ")
-            temp = data["tweet_content"].split(' ')
+            tmpStr = "".join(data["tweet_content"])
+            tmpStr = tmpStr.replace("."," ")
+            print tmpStr
+            temp = tmpStr.split(' ')
             output = output + temp 
-            print output[c]
-            c = c + 1
+
     print "Tweets string: \n" 
     sentencesPerPara = sentences/paragraphs
     wordsPerSentence = words/sentences
-    print "per ", sentencesPerPara, " ", wordsPerSentence
     outLen = len(output)
     counter = 0
     final = ""
-    print "printing final:"
+    excess = False
     for i in range (0, paragraphs):
+        if (tags == True):
+            final = final + "<p>"
         for j in range (0, sentencesPerPara):
             for k in range (0, wordsPerSentence):
                 final = final + output[counter % outLen] + " "
                 counter = counter + 1
+                words = words - 1
+
             final = final[:-1]
             final = final + ". "
-            print final
-        final = final + '\n\n'                                          
-    print "final", final
+            sentences = sentences - 1
+         #   print final
+        if (tags == True):
+            final = final + "</p>"
+        else:
+           final = final + '\n\n'
+
+    if (words != 0 or sentences != 0):
+        excess = True
+        if (tags == True):
+            final = final[:-4]
+        else:
+            final = final[:-2]
+
+
+    if (words != 0 and sentences != 0):
+        while (sentences != 1):
+            final = final + output[counter % outLen] + ". "
+            counter = counter + 1
+            sentences = sentences - 1
+            words = words - 1
+        while (words != 0):
+            final = final + output[counter % outLen] + " "
+            counter = counter + 1
+            words = words - 1
+        final = final +  "."
+    elif (words!= 0):
+        final = final[:-1]
+        while (words != 0):
+            final = final + output[counter % outLen] + " "
+            counter = counter + 1
+            words = words - 1
+        final = final +  "."
+
+    if (excess == True):
+        if (tags == True):
+            final = final + "</p>"
+        else:
+           final = final + '\n\n'
+    print "final\n", final
     return final            
      
 def main():
@@ -72,7 +112,7 @@ def main():
     tags = data["tags"]
 
     print("paragraphs: ", paragraphs, ", words: ", words, ", sentences: ", sentences, ", tags: ", tags, " test: ", )
-    return text_generator(paragraphs, sentences, words, tags)
+    return text_generator(int(paragraphs), int(sentences), int(words), bool(tags))
 
 if __name__ == "__main__":
     main()
