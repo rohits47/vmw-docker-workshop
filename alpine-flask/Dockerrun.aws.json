@@ -5,7 +5,8 @@
       "name": "eb-php-app",
       "host": {
         "sourcePath": "/var/www/backend"
-      }
+      },
+    "ContainerDirectory": "/app"
     }
   ],
   "containerDefinitions": [
